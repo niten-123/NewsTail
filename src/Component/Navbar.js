@@ -36,7 +36,7 @@ export class Navbar extends Component {
                 </li>
                 <li className="nav-item">
                   <a className="nav-link text-center">
-                  <i class="bi bi-globe2 mx-1"></i>Global
+                  <i className="bi bi-globe2 mx-1"></i>Global
                   </a>
                 </li>
                 <li className="nav-item">
@@ -54,10 +54,15 @@ export class Navbar extends Component {
                     <i className="bi bi-controller mx-1"></i>Sport
                   </a>
                 </li>
+                <li className="nav-item">
+                  <a className="nav-link text-center">
+                  <i className="bi bi-hospital mx-1"></i>Medical
+                  </a>
+                </li>
               </ul>
           <div className="dropdown ">
   <button className="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-  <i class="bi bi-globe-asia-australia " ></i> Country
+  <i className="bi bi-globe-asia-australia " ></i> Country
   </button>
   <ul className="dropdown-menu  mt-2 ">
     <div className=" d-flex justify-content-between">
