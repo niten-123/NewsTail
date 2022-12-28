@@ -1,22 +1,14 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-export class Navbar extends Component {
-  constructor(){
-    super();
-    this.state={
-          country:"Country"
-        }
-
-  }    
-  
-
-  render() {
+const  Navbar=(props)=>{
+  const[country,setCountry]= useState("Country")
+ 
     return (
       <>
         <nav className="navbar navbar-expand-lg  sticky-top bg-light ">
           <div className="container-fluid">
-            <Link className="navbar-brand" to="#">
+            <Link className="navbar-brand" to="/general">
               Newsline
             </Link>
             <button
@@ -66,29 +58,31 @@ export class Navbar extends Component {
                   <i className="bi bi-tv mx-1"></i>Entertainment
                   </Link>
                 </li>
+                <li className="nav-item mx-2">
+                  <Link  className="nav-link text-center" to="/health">
+                  <i className="bi bi-tv mx-1"></i>Health
+                  </Link>
+                </li>
               </ul>
               
           <div className="dropdown  ">
   <button className="btn  dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-  <i className="bi bi-globe-asia-australia mx-1" ></i>{this.state.country}
+  <i className="bi bi-globe-asia-australia mx-1" ></i>{country}
   </button>
   <ul className="dropdown-menu  mt-2 ">
     <div className=" d-flex justify-content-between">
         <div className="">           
-    <li><button className="dropdown-item ">India</button></li>
-    <li><button className="dropdown-item" >America</button></li>
-    <li><button className="dropdown-item" to="#">Russia</button></li>
+    <li><button className="dropdown-item " onClick={()=>{setCountry("India")}}>India</button></li>
+    <li><button className="dropdown-item" onClick={()=>{setCountry("America")}} >America</button></li>
+    <li><button className="dropdown-item"  onClick={()=>{setCountry("Russia")}}>Russia</button></li>
         </div>
         <div className="">           
-    <li><a className="dropdown-item " href="#">China</a></li>
-    <li><a className="dropdown-item" href="#">Aafrica</a></li>
-    <li><a className="dropdown-item" href="#">Afghanistan</a></li>
+    <li><button className="dropdown-item " onClick={()=>{setCountry("Australia")}}> Australia</button></li>
+    <li><button className="dropdown-item" onClick={()=>{setCountry("France")}} >France</button></li>
+    <li><button className="dropdown-item"  onClick={()=>{setCountry("United Kingdom")}}>United Kingdom</button></li>
         </div>
-        <div className="">           
-    <li><a className="dropdown-item " href="#">Korea</a></li>
-    <li><a className="dropdown-item" href="#">Pakistan</a></li>
-    <li><a className="dropdown-item" href="#">Japan</a></li>
-        </div>
+        
+       
        
     </div>
 
@@ -101,6 +95,6 @@ export class Navbar extends Component {
       </>
     );
   }
-}
+
 
 export default Navbar;

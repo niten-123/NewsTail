@@ -1,84 +1,85 @@
-import React, { Component } from "react";
+import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Newsitem from "./Newsitem";
 import Spinner from "./Spinner";
 
-export class News extends Component {
-  constructor(props) {
-    super(props);
+const News= (props)=> {
+ const [articles, setArticles]=useState([])
+ const [page , setPage]= useState(1)
+ const [loading , setLoading]= useState(true)
+ const [totalResults , setTotalResults]= useState(0)
 
-    this.state = {
-      articles: [],
-      page: 1,
-      loading: false,
-      totalResults: 0,
-    };
-    document.title = `Newsline - ${this.capitalizeFirstLetter(
-      this.props.catogary
-    )} News`;
-  }
+  
+ 
 
-  capitalizeFirstLetter(string) {
+  const capitalizeFirstLetter=(string)=> {
     return string.charAt(0).toUpperCase() + string.slice(1);
   }
+  
+   
 
-  async updatenews() {
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.catogary}&apiKey=1edc34a324844c1e9e8aedea137e3549&page=${this.state.page}&pagesize=${this.props.pagesize}`;
-    this.setState({ loading: true });
+  const Updatenews =async()=>{
+    props.setprogress(10)
+    let url = `https://saurav.tech/NewsAPI/top-headlines/category/${props.catogary}/${props.country}.json`;
+    setLoading(true); 
     let data = await fetch(url);
+    props.setprogress(50)
     let parsedData = await data.json();
+    props.setprogress(70)
     console.log(parsedData);
-    this.setState({
-      articles: parsedData.articles,
-      totalResults: parsedData.totalResults,
-      loading: false,
-    });
+    setArticles(parsedData.articles);
+    setTotalResults( parsedData.totalResults);
+    setLoading(false)
+    props.setprogress(100)
+      
   }
-  async componentDidMount() {
-    this.updatenews();
-  }
+  useEffect(()=>{
+   Updatenews();
+    document.title = `Newsline - ${capitalizeFirstLetter(
+      props.catogary
+    )} News`;
+  },[])
 
-  fetchMoreData = async () => {
-    this.setState({ page: this.state.page + 1 });
-    let url = `https://newsapi.org/v2/top-headlines?country=${this.props.country}&category=${this.props.catogary}&apiKey=1edc34a324844c1e9e8aedea137e3549&page=${this.state.page}&pagesize=${this.props.pagesize}`;
+  const fetchMoreData = async () => {
+   setPage(page + 1)
+    let url =`https://saurav.tech/NewsAPI/top-headlines/category/${props.catogary}/${props.country}.json`;
    
     let data = await fetch(url);
     let parsedData = await data.json();
     console.log(parsedData);
-    this.setState({
-      articles: this.state.articles.concat(parsedData.articles),
-      totalResults: parsedData.totalResults,
-      
-    });
+    setArticles( articles.concat(parsedData.articles));
+    setTotalResults(parsedData.totalResults)
+    
+    
   };
 
-  render() {
-    console.log("render");
+  
+    
 
     return (
       <>
-        <div className={`bg-opacity-10  bg-${this.props.bgcolor}`}>
+       
           <h3 className="text-center pt-4 ">
             <strong>
               <u>NewsLine</u>
             </strong>
-            {` - Top ${this.capitalizeFirstLetter(
-              this.props.catogary
+            {` - Top ${capitalizeFirstLetter(
+              props.catogary
             )} News Headlines   `}
           </h3>
-          {this.state.loading && <Spinner/>}
+          {loading && <Spinner/>}
           <InfiniteScroll
-            dataLength={this.state.articles.length}
-            next={this.fetchMoreData}
-            hasMore={this.state.articles.length !== this.state.totalResults}
+            dataLength={articles.length}
+            next={fetchMoreData}
+            hasMore={articles.length !== totalResults}
             loader={<Spinner />}
           >
             <div className="container">
               <div className="row">
                 {
-                  this.state.articles.map((item) => {
+                articles.map((item) => {
                     return (
-                      <div className="col-md-4 col-sm-12 my-3" key={item.url}>
+                      <div className="col-md-6 col-sm-12 my-3" key={item.url}>
                         <Newsitem
                           title={item.title ? item.title.slice(0, 40) : ""}
                           description={
@@ -98,10 +99,10 @@ export class News extends Component {
               </div>
             </div>
           </InfiniteScroll>
-        </div>
+        
       </>
     );
   }
-}
+
 
 export default News;
