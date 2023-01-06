@@ -8,7 +8,7 @@ const NewsItem=(props)=>{
     <div className="card " >
     <div className="position-absolute d-flex justify-content-end" style={{width: "100%",height: "2.5rem",}}> <p className='text-light bg-danger 'style={{height:" 1.5rem",borderRadius:"3px", padding:"0px 4px"}}>{source}</p> </div>
    
-  <img src={imageUrl} className="card-img-top" alt="No Image" style={{height: "17rem"}}/>
+  <img src={imageUrl} className="card-img-top" alt="No Image" style={{height: "13rem"}}/>
   <div className="card-body">
   
     <h5 className="card-title text-dark">{title}...  </h5>

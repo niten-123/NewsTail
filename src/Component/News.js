@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Newsitem from "./Newsitem";
 import Spinner from "./Spinner";
+ 
 
 const News= (props)=> {
  const [articles, setArticles]=useState([])
@@ -20,7 +21,7 @@ const News= (props)=> {
 
   const Updatenews =async()=>{
     props.setprogress(10)
-    let url = `https://saurav.tech/NewsAPI/top-headlines/category/${props.catogary}/${props.country}.json`;
+    let url =`https://newsapi.org/v2/top-headlines?&category=${props.catogary}&page=${page}&apiKey=1edc34a324844c1e9e8aedea137e3549&pagesize=${props.pagesize}`;
     setLoading(true); 
     let data = await fetch(url);
     props.setprogress(50)
@@ -42,7 +43,7 @@ const News= (props)=> {
 
   const fetchMoreData = async () => {
    setPage(page + 1)
-    let url =`https://saurav.tech/NewsAPI/top-headlines/category/${props.catogary}/${props.country}.json`;
+    let url =`https://newsapi.org/v2/top-headlines?&category=${props.catogary}&page=${page+1}&apiKey=1edc34a324844c1e9e8aedea137e3549&pagesize=${props.pagesize}`;
    
     let data = await fetch(url);
     let parsedData = await data.json();
@@ -58,14 +59,14 @@ const News= (props)=> {
 
     return (
       <>
-       
-          <h3 className="text-center pt-4 ">
+       <div style={{}}>
+          <h3 className="text-center pt-4 text-dark ">
             <strong>
               <u>NewsLine</u>
             </strong>
             {` - Top ${capitalizeFirstLetter(
               props.catogary
-            )} News Headlines   `}
+            )} News Headlines (${props.country})  `}
           </h3>
           {loading && <Spinner/>}
           <InfiniteScroll
@@ -79,7 +80,7 @@ const News= (props)=> {
                 {
                 articles.map((item) => {
                     return (
-                      <div className="col-md-6 col-sm-12 my-3" key={item.url}>
+                      <div className="col-md-6 col-lg-4 col-xs-12 my-3" key={item.url}>
                         <Newsitem
                           title={item.title ? item.title.slice(0, 40) : ""}
                           description={
@@ -98,8 +99,9 @@ const News= (props)=> {
                   })}
               </div>
             </div>
+          
           </InfiniteScroll>
-        
+          </div>
       </>
     );
   }
