@@ -9,7 +9,7 @@ const  Navbar=()=>{
         <nav className="navbar navbar-expand-lg  sticky-top  bg-light  ">
           <div className="container-fluid">
             <Link className="navbar-brand" to="/general">
-              Newsline
+              NewsTail
             </Link>
             <button
               className="navbar-toggler"

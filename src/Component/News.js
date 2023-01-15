@@ -21,13 +21,12 @@ const News= (props)=> {
 
   const Updatenews =async()=>{
     props.setprogress(10)
-    let url =`https://newsapi.org/v2/top-headlines?&category=${props.catogary}&page=${page}&apiKey=1edc34a324844c1e9e8aedea137e3549&pagesize=${props.pagesize}`;
+    let url =`https://newsapi.org/v2/top-headlines?&scategory=${props.catogary}&page=${page}&country=us&apiKey=1edc34a324844c1e9e8aedea137e3549&pagesize=${props.pagesize}`;
     setLoading(true); 
     let data = await fetch(url);
     props.setprogress(50)
     let parsedData = await data.json();
     props.setprogress(70)
-    console.log(parsedData);
     setArticles(parsedData.articles);
     setTotalResults( parsedData.totalResults);
     setLoading(false)
@@ -36,22 +35,18 @@ const News= (props)=> {
   }
   useEffect(()=>{
    Updatenews();
-    document.title = `Newsline - ${capitalizeFirstLetter(
+    document.title = `Newstail - ${capitalizeFirstLetter(
       props.catogary
     )} News`;
   },[])
 
   const fetchMoreData = async () => {
    setPage(page + 1)
-    let url =`https://newsapi.org/v2/top-headlines?&category=${props.catogary}&page=${page+1}&apiKey=1edc34a324844c1e9e8aedea137e3549&pagesize=${props.pagesize}`;
-   
+    let url =`https://newsapi.org/v2/top-headlines?&category=${props.catogary}&page=${page+1}&country=us&apiKey=1edc34a324844c1e9e8aedea137e3549&pagesize=${props.pagesize}`;   
     let data = await fetch(url);
-    let parsedData = await data.json();
-    console.log(parsedData);
+    let parsedData = await data.json();    
     setArticles( articles.concat(parsedData.articles));
-    setTotalResults(parsedData.totalResults)
-    
-    
+    setTotalResults(parsedData.totalResults)   
   };
 
   
@@ -62,7 +57,7 @@ const News= (props)=> {
        <div style={{}}>
           <h3 className="text-center pt-4 text-dark ">
             <strong>
-              <u>NewsLine</u>
+              <u>NewsTail</u>
             </strong>
             {` - Top ${capitalizeFirstLetter(
               props.catogary
@@ -75,10 +70,10 @@ const News= (props)=> {
             hasMore={articles.length !== totalResults}
             loader={<Spinner />}
           >
+
             <div className="container">
               <div className="row">
-                {
-                articles.map((item) => {
+                {articles.map((item) => {
                     return (
                       <div className="col-md-6 col-lg-4 col-xs-12 my-3" key={item.url}>
                         <Newsitem
@@ -108,3 +103,6 @@ const News= (props)=> {
 
 
 export default News;
+
+
+

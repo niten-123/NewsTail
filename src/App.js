@@ -28,14 +28,14 @@ const App=()=> {
        
       />
     <Routes>
-<Route exact path="/" element={<News  setprogress={setprogress} key="general" pagesize={5}  country="in"catogary="general"/>}/>
-<Route exact path="/general" element={<News  setprogress={setprogress} key="general" pagesize={5}   country="in"catogary="general"/>}/>
-<Route exact path="/business" element={<News  setprogress={setprogress} key="business" pagesize={5} country="in"  catogary="business" />}/>
-<Route exact path="/technology" element={<News  setprogress={setprogress} key="technology" pagesize={5} country="in" catogary="technology"/>}/>
-<Route exact path="/sport" element={<News  setprogress={setprogress} key="sport"  country="in"pagesize={5}  catogary="sports" />}/>
-<Route exact path="/science" element={<News  setprogress={setprogress} key="science"  country="in" pagesize={5} catogary="science" />}/>
-<Route exact path="/entertainment" element={<News  setprogress={setprogress} key="entertainment" pagesize={5} country="in"  catogary="entertainment"/>}/>
-<Route exact path="/health" element={<News  setprogress={setprogress} key="health"  country="in" pagesize={5}  catogary="health"/>}/>
+<Route exact path="/" element={<News  setprogress={setprogress} key="general" pagesize={5}  country="USA"catogary="general"/>}/>
+<Route exact path="/general" element={<News  setprogress={setprogress} key="general" pagesize={5}   country="USA"catogary="general"/>}/>
+<Route exact path="/business" element={<News  setprogress={setprogress} key="business" pagesize={5} country="USA"  catogary="business" />}/>
+<Route exact path="/technology" element={<News  setprogress={setprogress} key="technology" pagesize={5} country="USA" catogary="technology"/>}/>
+<Route exact path="/sport" element={<News  setprogress={setprogress} key="sport"  country="USA"pagesize={5}  catogary="sports" />}/>
+<Route exact path="/science" element={<News  setprogress={setprogress} key="science"  country="USA" pagesize={5} catogary="science" />}/>
+<Route exact path="/entertainment" element={<News  setprogress={setprogress} key="entertainment" pagesize={5} country="USA"  catogary="entertainment"/>}/>
+<Route exact path="/health" element={<News  setprogress={setprogress} key="health"  country="USA" pagesize={5}  catogary="health"/>}/>
 
  </Routes>
  
